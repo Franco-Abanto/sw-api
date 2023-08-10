@@ -1,0 +1,41 @@
+service: aws-lambda-dynamodb-swapi
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-west-2
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource:
+        - arn:aws:dynamodb:us-west-2:378216413421:table/SwapiTable
+
+functions:
+  api:
+    handler: src/index.handler
+    events:
+      - httpApi:
+          path: /
+          method: get
+  crearRegistro:
+    handler: src/crearRegistro.crearRegistro
+    events:
+      - httpApi:
+          path: /registro
+          method: post
+
+resources:
+  Resources:
+    SwapiTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: SwapiTable
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
