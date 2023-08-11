@@ -6,7 +6,7 @@ const listarPeople = async (event) => {
 
     const resultado = await dynamodb
       .scan({
-        TableName: "SwapiTable",
+        TableName: "PeopleTable",
       })
       .promise();
 

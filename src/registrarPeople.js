@@ -2,7 +2,7 @@ const { v4 } = require("uuid");
 const axios = require("axios");
 const AWS = require("aws-sdk");
 
-const crearRegistro = async (event) => {
+const registrarPeople = async (event) => {
   const dynamodb = new AWS.DynamoDB.DocumentClient();
 
   const { numero } = JSON.parse(event.body);
@@ -22,7 +22,7 @@ const crearRegistro = async (event) => {
 
   await dynamodb
     .put({
-      TableName: "SwapiTable",
+      TableName: "PeopleTable",
       Item: mappedData,
     })
     .promise();
@@ -34,5 +34,5 @@ const crearRegistro = async (event) => {
 };
 
 module.exports = {
-  crearRegistro,
+  registrarPeople,
 };

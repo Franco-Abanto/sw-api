@@ -10,7 +10,8 @@ provider:
       Action:
         - dynamodb:*
       Resource:
-        - arn:aws:dynamodb:us-west-2:378216413421:table/SwapiTable
+        - arn:aws:dynamodb:us-west-2:378216413421:table/PeopleTable
+        - arn:aws:dynamodb:us-west-2:378216413421:table/PlanetsTable
 
 functions:
   api:
@@ -19,11 +20,17 @@ functions:
       - httpApi:
           path: /
           method: get
-  crearRegistro:
-    handler: src/crearRegistro.crearRegistro
+  registrarPeople:
+    handler: src/registrarPeople.registrarPeople
     events:
       - httpApi:
-          path: /registro
+          path: /registrar/people
+          method: post
+  registrarPlanets:
+    handler: src/registrarPlanets.registrarPlanets
+    events:
+      - httpApi:
+          path: /registrar/planets
           method: post
   listarPeople:
     handler: src/listarPeople.listarPeople
@@ -40,10 +47,21 @@ functions:
 
 resources:
   Resources:
-    SwapiTable:
+    PeopleTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: SwapiTable
+        TableName: PeopleTable
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+    PlanetsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: PlanetsTable
         BillingMode: PAY_PER_REQUEST
         AttributeDefinitions:
           - AttributeName: id
