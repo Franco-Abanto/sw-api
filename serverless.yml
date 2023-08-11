@@ -25,6 +25,18 @@ functions:
       - httpApi:
           path: /registro
           method: post
+  listarPeople:
+    handler: src/listarPeople.listarPeople
+    events:
+      - httpApi:
+          path: /listar/people
+          method: get
+  listarStarships:
+    handler: src/listarStarships.listarStarships
+    events:
+      - httpApi:
+          path: /listar/starships
+          method: get
 
 resources:
   Resources:
