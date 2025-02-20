@@ -1,92 +1,90 @@
-<!--
-title: 'AWS Simple HTTP Endpoint example in NodeJS'
-description: 'This template demonstrates how to make a simple HTTP API with Node.js running on AWS Lambda and API Gateway using the Serverless Framework.'
-layout: Doc
-framework: v3
-platform: AWS
-language: nodeJS
-authorLink: 'https://github.com/serverless'
-authorName: 'Serverless, inc.'
-authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
--->
+# Star Wars API
 
-# Serverless Framework Node HTTP API on AWS
+Este proyecto es una API HTTP sencilla desarrollada con Node.js, utilizando el Framework Serverless para su despliegue en AWS Lambda y API Gateway. La API proporciona información relacionada con el universo de Star Wars.
 
-This template demonstrates how to make a simple HTTP API with Node.js running on AWS Lambda and API Gateway using the Serverless Framework.
+## Características
 
-This template does not include any kind of persistence (database). For more advanced examples, check out the [serverless/examples repository](https://github.com/serverless/examples/) which includes Typescript, Mongo, DynamoDB and other examples.
+- **Node.js**: Entorno de ejecución para JavaScript en el servidor.
+- **Serverless Framework**: Herramienta para desarrollar y desplegar aplicaciones sin servidor en plataformas en la nube.
+- **AWS Lambda**: Servicio de computación que permite ejecutar código sin aprovisionar servidores.
+- **API Gateway**: Servicio de AWS para crear, publicar, mantener, monitorear y asegurar APIs a cualquier escala.
 
-## Usage
+## Requisitos Previos
 
-### Deployment
+Antes de comenzar, asegúrate de tener instalados los siguientes componentes:
 
-```
-$ serverless deploy
-```
+- [Node.js](https://nodejs.org/) (versión 14 o superior)
+- [Serverless Framework](https://www.serverless.com/) (versión 2.72.0 o superior)
+- Una cuenta de [AWS](https://aws.amazon.com/) con las credenciales configuradas localmente.
 
-After deploying, you should see output similar to:
+## Instalación
+
+1. **Clonar el repositorio:**
+
+   ```bash
+   git clone https://github.com/Franco-Abanto/sw-api.git
+   ```
+
+2. **Navegar al directorio del proyecto:**
+
+   ```bash
+   cd sw-api
+   ```
+
+3. **Instalar las dependencias:**
+
+   ```bash
+   npm install
+   ```
+
+## Despliegue
+
+Para desplegar la API en AWS, ejecuta el siguiente comando:
 
 ```bash
-Deploying aws-node-http-api-project to stage dev (us-east-1)
+serverless deploy
+```
 
-✔ Service deployed to stack aws-node-http-api-project-dev (152s)
+Después del despliegue, deberías ver una salida similar a:
+
+```
+Deploying sw-api to stage dev (us-east-1)
+
+✔ Service deployed to stack sw-api-dev (152s)
 
 endpoint: GET - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/
 functions:
-  hello: aws-node-http-api-project-dev-hello (1.9 kB)
+  hello: sw-api-dev-hello (1.9 kB)
 ```
 
-_Note_: In current form, after deployment, your API is public and can be invoked by anyone. For production deployments, you might want to configure an authorizer. For details on how to do that, refer to [http event docs](https://www.serverless.com/framework/docs/providers/aws/events/apigateway/).
+Nota: En su forma actual, después del despliegue, tu API es pública y puede ser invocada por cualquier persona. Para despliegues en producción, es recomendable configurar un autorizador. Para más detalles sobre cómo hacerlo, consulta la [documentación del evento HTTP](https://www.serverless.com/framework/docs/providers/aws/events/apigateway/).
 
-### Invocation
+## Invocación Local
 
-After successful deployment, you can call the created application via HTTP:
-
-```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/
-```
-
-Which should result in response similar to the following (removed `input` content for brevity):
-
-```json
-{
-  "message": "Go Serverless v2.0! Your function executed successfully!",
-  "input": {
-    ...
-  }
-}
-```
-
-### Local development
-
-You can invoke your function locally by using the following command:
+Para probar la función localmente, puedes ejecutar:
 
 ```bash
 serverless invoke local --function hello
 ```
 
-Which should result in response similar to the following:
+Esto ejecutará la función `hello` localmente y mostrará la respuesta en la terminal.
 
-```
-{
-  "statusCode": 200,
-  "body": "{\n  \"message\": \"Go Serverless v3.0! Your function executed successfully!\",\n  \"input\": \"\"\n}"
-}
-```
+## Estructura del Proyecto
 
+- `src/`: Contiene el código fuente de la función Lambda.
+- `serverless.yml`: Archivo de configuración del Serverless Framework.
+- `package.json`: Archivo de configuración de npm que incluye las dependencias y scripts del proyecto.
 
-Alternatively, it is also possible to emulate API Gateway and Lambda locally by using `serverless-offline` plugin. In order to do that, execute the following command:
+## Contribuciones
 
-```bash
-serverless plugin install -n serverless-offline
-```
+Si deseas contribuir a este proyecto:
 
-It will add the `serverless-offline` plugin to `devDependencies` in `package.json` file as well as will add it to `plugins` in `serverless.yml`.
+1. Realiza un fork del repositorio.
+2. Crea una nueva rama con tu funcionalidad o corrección: `git checkout -b mi-nueva-funcionalidad`.
+3. Realiza tus cambios y haz commit: `git commit -m 'Agregar nueva funcionalidad'`.
+4. Envía tus cambios al repositorio remoto: `git push origin mi-nueva-funcionalidad`.
+5. Abre una solicitud de pull en GitHub.
 
-After installation, you can start local emulation with:
+## Licencia
 
-```
-serverless offline
-```
-
-To learn more about the capabilities of `serverless-offline`, please refer to its [GitHub repository](https://github.com/dherault/serverless-offline).
+Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
